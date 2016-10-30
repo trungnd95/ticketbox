@@ -11,7 +11,10 @@ URL:
 
 The following **required** functionality is complete:
 
-* [x] 10 model tests, 2 route tests, 2 controller tests, 2 view tests.
+* [x] 10 model tests, 
+* [x] 2 route tests
+* [x] 2 controller tests
+* [x] 2 view tests.
 
 #### Events
 
@@ -40,20 +43,10 @@ The following **required** functionality is complete:
 * [x] User can see a list of events he or she has created.
 * [x] Users can edit their event after creation. But only the user who created the event can edit the event. 
 
-### Optional Stories
-
-* [ ] Users can log in with Facebook.
-* [ ] Users receive an email when they have purchased a ticket.
-* [ ] Users can see "related events" when browsing an event. Related events should belong to the same category and be in the same region.
-* [ ] User A can allow User B to edit User A's event. In other words, an event owner can assign other people to be "event admins". 
-* [ ] Ticket types have an optional "minimum" purchase quantity. ([Example Screenshot](http://i.imgur.com/DOYtAR0.png))
-* [ ] Events are automatically labeled as "Hot". "Hot" events should have a red border or some sort of visual flourish. The event title should also be prefixed with "**HOT:**".
-* [ ] Instead of showing all of the events on the main page, an "admin" user can dictate the events that show up on the main page.
-
 ## Notes
 I haven't written more test before. And it's strange with me
 
 ## Video Walkthrough
 
-GIF created with [Demo]('#').
+![Video Walkthrough](app/assets/images/desktop-animation.gif).
 
