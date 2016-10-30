@@ -1,0 +1,22 @@
+<nav>
+  <div class="nav-wrapper">
+    <%= link_to 'Billet Ami', root_path, class: 'brand-logo' %>
+    <ul class="right hide-on-med-and-down">
+      <li><%= link_to 'Create Event', new_event_path, method: :get %></li>
+      <% if sign_in? %>
+          <li><%= link_to 'Your Events', mine_events_path, method: :get %></li>
+          <li><%= link_to 'Edit Profile', edit_user_path(current_user_id), method: :get %></li>
+          <li><%= link_to 'Logout', sessions_path, method: :delete %></li>
+      <% else %>
+          <li><a class="modal-trigger" href="#login-modal">Login</a></li>
+          <li><a class="modal-trigger" href="#register-modal">Register</a></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+<!-- Register Modal -->
+<%= render 'users/new' %>
+
+<!-- Login Modal -->
+<%= render 'sessions/new' %>

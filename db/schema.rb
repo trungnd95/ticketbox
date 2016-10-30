@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -34,10 +33,9 @@ ActiveRecord::Schema.define(version: 20160328020515) do
     t.datetime "updated_at",                                null: false
     t.integer  "user_id"
     t.boolean  "published",                 default: false
+    t.index ["category_id"], name: "index_events_on_category_id", using: :btree
+    t.index ["venue_id"], name: "index_events_on_venue_id", using: :btree
   end
-
-  add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
-  add_index "events", ["venue_id"], name: "index_events_on_venue_id", using: :btree
 
   create_table "regions", force: :cascade do |t|
     t.string   "name"
@@ -52,9 +50,8 @@ ActiveRecord::Schema.define(version: 20160328020515) do
     t.integer  "max_quantity"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["event_id"], name: "index_ticket_types_on_event_id", using: :btree
   end
-
-  add_index "ticket_types", ["event_id"], name: "index_ticket_types_on_event_id", using: :btree
 
   create_table "tickets", force: :cascade do |t|
     t.integer  "user_id"
@@ -78,10 +75,9 @@ ActiveRecord::Schema.define(version: 20160328020515) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "name"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "venues", force: :cascade do |t|
     t.string   "name"
@@ -89,9 +85,8 @@ ActiveRecord::Schema.define(version: 20160328020515) do
     t.integer  "region_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["region_id"], name: "index_venues_on_region_id", using: :btree
   end
-
-  add_index "venues", ["region_id"], name: "index_venues_on_region_id", using: :btree
 
   add_foreign_key "events", "categories"
   add_foreign_key "events", "venues"

@@ -7,17 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <%= render 'shared/message' %>
   <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-    <a class="navbar-brand" href="<%= root_path %>">Coder Ticket</a>
-    <ul class="nav navbar-nav">
+    <a class="navbar-brand" href="<%= root_path %>">Trung Manucian Ticket</a>
+    <ul class="nav navbar-nav pull-right">
 
       <% if user_signed_in? %>
-          <li class="nav-item">
-             <%= link_to "Log out",destroy_user_session_path,class: "nav-link",method: 'delete'  %>
-          </li>
+
            <li class="nav-item">
-              <%= link_to "Create events",new_event_path,class: "nav-link"  %>
+              <%= link_to "Create event",new_event_path,class: "nav-link"  %>
           </li>
           <li class="nav-item">
              <%= link_to "Your events",user_events_path,class: "nav-link"  %>
@@ -26,7 +24,7 @@
              <%= link_to "Your Tickets",user_tickets_path,class: "nav-link"  %>
           </li>
           <li class="nav-item">
-             <%= link_to "Create Venue",new_venue_path,class: "nav-link"  %>
+             <%= link_to "Log out",destroy_user_session_path,class: "nav-link",method: 'delete'  %>
           </li>
       <% else %>
       <li class="nav-item">
@@ -36,25 +34,14 @@
         <%= link_to "Sign up",new_user_registration_path,class: "nav-link"  %>
       </li>
       <% end %>
-      
-      
+
+
     </ul>
-  </nav>  
+  </nav>
 
-
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <% if flash[:error] %>
-    <div class="alert alert-danger"><%= flash[:error] %></div>
-    <% end %>
-
-    <% if flash[:success] %>
-    <div class="alert alert-success"><%= flash[:success] %></div>
-    <% end %>
-  
- 
+  <!-- <div class="container"> -->
     <%= yield %>
+  <!-- </div> -->
 
 </body>
 </html>

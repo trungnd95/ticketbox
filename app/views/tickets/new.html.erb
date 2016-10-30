@@ -1,54 +1,82 @@
-<div class="container-fluid tickets-buy" data-no-turbolink="true">
-  <div class="row tickets-header">
-    <div class="col-xs-12 col-md-11 col-md-offset-1">
-      <h3> <%= @event.name %> </h3>
-      <div class="pull-left">
-        <%= fa_icon 'map-marker' %>
+<div class="container tickets_order">
+  <div class="row">
+    <h2 class="text-center">
+      Order Event
+    </h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <section class="info">
+        <div class="info-header">
+          <h4><%= @event.name %></h4>
+        </div>
+        <div class="info-body">
+          <div class="pull-left">
+            <%= fa_icon 'map-marker' %>
+          </div>
+          <div class="venue-details">
+           <%= @event.venue.name %>
+           <br/>
+           <p style="padding-left: 2rem"><%= @event.venue.full_address %></p>
+         </div>
+         <div style="height: 1rem"></div>
+         <div class="pull-left">
+          <%= fa_icon 'clock-o' %>
+        </div>
+        <div class="time-details">
+          <%= @event.starts_at.strftime('%A, %d %b %Y %l:%M %p') %>
+        </div>
+        <div style="height: 1rem"></div>
+        <div class="pull-left">
+          <%= fa_icon 'clock-o' %>
+        </div>
+        <div class="time-details">
+          <h6>Ticket Info: </h6>
+          <table class="table table-hover">
+            <% @event.ticket_types.each do |type| %>
+            <tr>
+              <th><%= type.name %></th>
+              <td><%= type.max_quantity %> available</td>
+            </tr>
+            <% end %>
+          </table>
+        </div>
       </div>
-      <div class="venue-details">
-       <%= @event.venue.name %>
-       <br/>
-       <%= @event.venue.full_address %>
-     </div>
-
-     <div class="pull-left">
-      <%= fa_icon 'clock-o' %>
-    </div>
-    <div class="time-details"> 
-      <%= @event.starts_at.strftime('%A, %d %b %Y %l:%M %p') %> 
-    </div>
-
-
+    </section>
+  </div>
+  <div class="col-md-6">
+    <section class="book">
+      <div class="book-header">
+        <h4 class="text-center">Buy Tickets</h4>
+      </div>
+      <div class="book-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @event.ticket_types.each do |ticket_type| %>
+            <%= simple_form_for [@event, @ticket] do |f|%>
+            <%= f.input :ticket_type_id,input_html: { value: ticket_type.id }, as: :hidden %>
+            <tr>
+              <td><%= ticket_type.name %></td>
+              <td><%= number_to_currency(ticket_type.price, unit: 'VND ', precision: 0) %></td>
+              <td><%= f.input :quantity, collection: 1..ticket_type.quantity_show_in_combobox,selected: 0,label: false %></td>
+              <td>
+                <%= f.button :submit, 'Buy',class: "btn btn-success btn-block" %>
+              </td>
+            </tr>
+            <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-11 col-md-offset-1">  
-    <div class="table" style="margin-top:20px;">
-      <div class="row">
-        <div class="col-sm-5"><b>Ticket Type</b></div>
-        <div class="col-sm-3"><b>Unit Price </b></div>
-        <div class="col-sm-2"><b>Quantity</b></div>
-      </div>
-      <% @event.ticket_types.each do |ticket_type| %>
-      <%= simple_form_for [@event, @ticket] do |f|%>
-
-      <div class="row" style="padding-top: 10px;">
-        <%= f.input :ticket_type_id,input_html: { value: ticket_type.id }, as: :hidden %>
-        <div class="col-sm-5"> <%= ticket_type.name %> </div>
-        <div class="col-sm-3"> <%= number_to_currency(ticket_type.price, unit: 'VND ', precision: 0) %> </div>
-        <div class="col-sm-2"><%= f.input :quantity, collection: 1..ticket_type.quantity_show_in_combobox,selected: 0,label: false %></div> 
-        <div class="col-sm-2"><%= f.button :submit, 'Buy',class: "btn btn-success btn-block" %></div>
-
-      </div>
-      <% end %>
-      <% end %> 
-    </table>
-  </div>
 </div>
-<div class="row">
-  <div class="col-md-2 col-md-offset-5">
-
-  </div>
-  <div>
-  </div>  
-

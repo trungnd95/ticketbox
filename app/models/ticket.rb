@@ -11,5 +11,4 @@ class Ticket < ActiveRecord::Base
 			false
 		end
 	end
-
 end

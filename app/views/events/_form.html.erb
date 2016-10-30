@@ -1,31 +1,80 @@
-
 <%= simple_form_for(@event) do |f| %>
-<%= f.input :name %>
-<%= f.input :hero_image_url %>
-<%= f.input :extended_html_description,label: 'Content:' %>
-<%= f.association :category,selected: 1 %>
-<%= f.association :venue,selected: 1 %>
-<%= f.input :starts_at %>
-<%= f.input :ends_at %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          Event Detail Information
+        </div>
+        <div class="card-block">
+          <%= f.input :name, placeholder: "Name ..." %>
+          <%= f.input :hero_image_url, placeholder: "Image URL ..." %>
+          <%= f.input :extended_html_description,placeholder: 'Content ...' %>
+          <%= f.input :starts_at %>
+          <%= f.input :ends_at %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          Choose Category
+        </div>
+        <div class="card-block">
+          <%= f.association :category,selected: 1 %>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          Venue Information
+        </div>
+        <div class="card-block">
+          <div class="input-field form-group">
+            <input id="venue_name" name="venue[name]" type="text" placeholder="Vanue Name ..." class="form-control" value="<%= venue_value(@event, 'name')%>">
+            <!-- <label for="venue" id="label-input">Name</label> -->
+          </div>
 
-<div class="ticket-div" style="border: 1px gray dotted;padding:10px;">
-	<h3 style="background-color: #8cc603;color:white;padding: 10px;text-align: center;">Tickets</h3>
-	<div id="tickets">
-		<%= f.simple_fields_for :ticket_types do |ticket_type| %>
-		<%= render 'ticket_type_fields', f: ticket_type %>
-		<% end %>
-	</div>
+          <div class="input-field form-group">
+            <input id="full_address" name="venue[full_address]" type="text" placeholder="Vanue Address ..." class="form-control"
+            value="<%= venue_value(@event, 'full_address')%>">
+            <!-- <label for="address" id="label-input">Address</label> -->
+          </div>
 
-	<div class="links">
-		<%= link_to_add_association 'Add ticket', f, :ticket_types, class: 'btn btn-primary' %>
-	</div>
-</div>
-
-<% if @event.new_record? %>  
-<%= f.button :submit, "Create", class: "btn btn-success",style: "width:100%; margin-top:20px;margin-bottom:30px;" %>
-<% else %>                      
-<%= f.button :submit, "Update", class: "btn btn-success",style: "width:100%; margin-top:20px;margin-bottom:30px;"  %>  
-<% end %>
-
-
+          <div class="input-field form-group">
+            <select name="venue[region_id]" class="form-control">
+              <% @regions.each do |region| %>
+              <option value="<%= region.id %>" "<%= selected_region(@event, region.id) %>"><%= region.name %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ticket_types">
+        <div class="card">
+        <div class="card-header">
+          Create Ticket Type (Using Nested Attributes)
+        </div>
+        <div class="card-block">
+          <%= f.simple_fields_for :ticket_types do |ticket_type| %>
+            <%= render 'ticket_type_fields', f: ticket_type %>
+          <% end %>
+        </div>
+        <div class="card-footer">
+          <%= link_to_add_association 'Add More Ticket', f, :ticket_types, class: 'btn btn-primary' %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <% if @event.new_record? %>
+      <%= f.button :submit, "Create", class: "btn btn-success",style: "width:100%; margin-top:20px;margin-bottom:30px;background-color: #34495e !important" %>
+      <% else %>
+      <%= f.button :submit, "Update", class: "btn btn-success",style: "width:100%; margin-top:20px;margin-bottom:30px;"  %>
+      <% end %>
+    </div>
+  </div>
 <% end %>

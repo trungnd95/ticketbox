@@ -1,0 +1,19 @@
+<% unless flash.empty? %>
+    <script type="text/javascript">
+        <% flash.each do |f| %>
+          var message  = "<%= f[1].to_s %>";
+          var type =  "<%= f[0] %>";
+          if(type == "notice")
+          {
+            type = "success";
+          }
+
+          if(type == "alert")
+          {
+            type = "error";
+          }
+
+          sweetAlert(message,"", type);
+        <% end %>
+    </script>
+<% end %>

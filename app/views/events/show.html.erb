@@ -31,11 +31,11 @@
         <div class="pull-left">
           <%= fa_icon 'clock-o' %>
         </div>
-        <div class="time-details"> 
-          <%= @event.starts_at.strftime('%A, %d %b %Y %l:%M %p') %> 
+        <div class="time-details">
+          <%= @event.starts_at.strftime('%A, %d %b %Y %l:%M %p') %>
         </div>
 
-        
+
 
         <div class="pull-left">
           <%= fa_icon 'map-marker' %>
@@ -53,7 +53,9 @@
           <%= @event.extended_html_description.html_safe %>
         </div>
 
-      </div>  
+      </div>
     </div>
   </div>
 </div>
+
+

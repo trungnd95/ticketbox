@@ -8,8 +8,10 @@ class Event < ActiveRecord::Base
   validates_uniqueness_of :name, uniqueness: {scope: [:venue, :starts_at]}
   accepts_nested_attributes_for :ticket_types, allow_destroy: true
 
+  # scope :upcoming, -> { where("start_at > (?) AND is_published = (?)", Time.now, true).order('created_at desc') }
+
   def venue_name
-  	venue ? venue.name : nil 
+  	venue ? venue.name : nil
   end
 
   def self.upcoming(name)

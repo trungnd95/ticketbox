@@ -6,4 +6,9 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  def check_duplicate_type type_id
+    tickets.map(&:ticket_type_id).include? type_id.to_i
+  end
+
 end

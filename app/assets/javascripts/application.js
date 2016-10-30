@@ -12,7 +12,17 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require tether
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
 //= require cocoon
+//= require datetimepicker
+////= require moment
+//= require bootstrap-datetimepicker
+//= require sweetalert
+
+$(document).on("turbolinks:load", function() {
+  $('.datetimepicker').datetimepicker();
+})
+

@@ -1,0 +1,20 @@
+<div class="row" style="margin-top: 32px">
+  <div class="col m6 offset-m3">
+    <div class="card">
+      <div class="card-content black-text" style="padding: 16px">
+        <%= form_tag search_events_path do %>
+            <div class="row" style="margin-bottom: 0">
+              <div class="col m10">
+                <input id="search" name="key_word" type="search" placeholder="Tìm sự kiện, khóa học, vui chơi..." required>
+              </div>
+              <div class="col m2" style="margin-top: 8px">
+                <button class="btn waves-effect waves-light" type="submit" name="action">
+                  Find
+                </button>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
